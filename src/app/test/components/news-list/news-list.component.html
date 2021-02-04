@@ -1,0 +1,17 @@
+<nb-card size="giant">
+  <nb-card-header>
+    Tin tức
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item *ngFor="let new of listStockNews$ | async">
+      <nb-card accent="info">
+        <nb-card-header>
+          <a href="{{new.mainLink}}" style="text-decoration: none;" target="_blank">{{new.title}}</a>
+        </nb-card-header>
+        <nb-card-body>
+          {{new.smallTitle}}
+        </nb-card-body>
+      </nb-card>
+    </nb-list-item>
+  </nb-list>
+</nb-card>

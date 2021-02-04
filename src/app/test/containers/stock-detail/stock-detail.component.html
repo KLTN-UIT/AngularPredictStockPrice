@@ -1,0 +1,89 @@
+<nb-layout>
+  <nb-layout-header fixed>
+    <div style="width: 100%;display: flex; justify-content: space-between; align-items: center">
+      <button nbButton (click)="backToMainPage()">
+        <nb-icon icon="arrow-back-outline"></nb-icon>
+      </button>
+      {{ time | async | date: 'hh:mm:ss a' }}
+    </div>
+  </nb-layout-header>
+  <nb-layout-column>
+    <nb-card style="height: 800px;">
+      <nb-tabset>
+        <nb-tab tabTitle="Dự đoán">
+          <div *ngIf="dataPrice$ | async">
+            <div>
+              <canvas baseChart style="width: 100%; height: 100%;"
+                      [datasets]="lineChartData"
+                      [labels]="lineChartLabels"
+                      [options]="lineChartOptions"
+                      [colors]="lineChartColors"
+                      [legend]="lineChartLegend"
+                      [chartType]="lineChartType"
+                      [plugins]="lineChartPlugins"></canvas>
+            </div>
+          </div>
+        </nb-tab>
+        <nb-tab tabTitle="Cổ phiếu ảnh hưởng">
+          <div>
+            <table mat-table [dataSource]="stocksEff$ | async" class="mat-elevation-z8" style="width: 100%;">
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="stockCode">
+                <th mat-header-cell *matHeaderCellDef> Stock Code </th>
+                <td mat-cell *matCellDef="let element"> {{element.stockCode}} </td>
+              </ng-container>
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="referencePrice">
+                <th mat-header-cell *matHeaderCellDef> Reference Price </th>
+                <td mat-cell *matCellDef="let element"> {{element.referencePrice}} </td>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="aTO">
+                <th mat-header-cell *matHeaderCellDef> ATO </th>
+                <td mat-cell *matCellDef="let element"> {{element.ato}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="rateOfInfluence">
+                <th mat-header-cell *matHeaderCellDef> Rate Of Influence </th>
+                <td mat-cell *matCellDef="let element"> {{element.rateOfInfluence}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="isIncrease">
+                <th mat-header-cell *matHeaderCellDef> Increase </th>
+                <td mat-cell *matCellDef="let element">
+                  <nb-icon *ngIf="element.isIncrease" style="color: lawngreen"
+                           icon="arrow-upward-outline">
+                  </nb-icon>
+                  <nb-icon *ngIf="!element.isIncrease" style="color: red"
+                           icon="arrow-downward-outline">
+                  </nb-icon>
+                </td>
+                <td mat-cell *matCellDef="let element"> {{element.isIncrease}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="percentageChange">
+                <th mat-header-cell *matHeaderCellDef> Percentage Change </th>
+                <td mat-cell *matCellDef="let element"> {{element.percentageChange}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="updatedAt">
+                <th mat-header-cell *matHeaderCellDef> Updated At </th>
+                <td mat-cell *matCellDef="let element"> {{element.updatedAt | date:'short'}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
+  </nb-layout-column>
+</nb-layout>

@@ -1,0 +1,39 @@
+<div class="industry-detail-container">
+  <nb-card accent="info">
+    <nb-card-header>Chỉ số ngành</nb-card-header>
+    <nb-card-body *ngIf="selectedIndustry$ | async as industry">
+      <div class="information-item">
+        <span>Code:</span>
+        <span>{{industry.industryCode}}</span>
+      </div>
+      <div class="information-item">
+        <span>EPS:</span>
+        <span>{{industry.eps}}</span>
+      </div>
+      <div class="information-item">
+        <span>ROE:</span>
+        <span>{{industry.roe}}</span>
+      </div>
+      <div class="information-item">
+        <span>PE:</span>
+        <span>{{industry.pe}}</span>
+      </div>
+      <div class="information-item">
+        <span>ROA:</span>
+        <span>{{industry.roa}}</span>
+      </div>
+      <div class="information-item">
+        <span>Volume:</span>
+        <span>{{industry.volume}}</span>
+      </div>
+      <div class="information-item">
+        <span>Foreignn Owned:</span>
+        <span>{{industry.foreignOwned}}</span>
+      </div>
+      <div class="information-item">
+        <span>Market Capitalization:</span>
+        <span>{{industry.marketCapitalization}}</span>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

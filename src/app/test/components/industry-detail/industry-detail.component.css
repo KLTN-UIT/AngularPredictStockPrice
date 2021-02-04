@@ -1,0 +1,9 @@
+.industry-detail-container {
+  margin-top: 10px;
+}
+
+.information-item {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
